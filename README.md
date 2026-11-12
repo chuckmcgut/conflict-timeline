@@ -14,5 +14,7 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `american-indian-wars-atlas.html` — American Indian Wars, 1600–1890
 - `punic-wars-atlas.html` — Punic Wars, 264–146 BC
 - `russian-civil-war-atlas.html` — Russian Revolution and Civil War, 1917–1922
+- `crusades-atlas.html` — Crusades, 1095–1291
+- `greek-wars-atlas.html` — Persian and Peloponnesian Wars, 499–404 BC
 
 Maps use present-day borders. Events, dates and casualty figures are from general knowledge (the Middle East entries for 2025–26 were checked against public web sources) and many figures are disputed or rounded.
