@@ -17,5 +17,6 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `crusades-atlas.html` — Crusades, 1095–1291
 - `greek-wars-atlas.html` — Persian and Peloponnesian Wars, 499–404 BC
 - `china-wars-atlas.html` — Chinese Civil War and Second Sino-Japanese War, 1927–1950
+- `minnesota-history-atlas.html` — Minnesota history: treaties and conflicts with the Dakota and Ojibwe, mining, milling and railroads, 1660–2021
 
 Maps use present-day borders. Events, dates and casualty figures are from general knowledge (the Middle East entries for 2025–26 were checked against public web sources) and many figures are disputed or rounded.
