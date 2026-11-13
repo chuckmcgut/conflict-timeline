@@ -16,5 +16,7 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `russian-civil-war-atlas.html` — Russian Revolution and Civil War, 1917–1922
 - `crusades-atlas.html` — Crusades, 1095–1291
 - `greek-wars-atlas.html` — Persian and Peloponnesian Wars, 499–404 BC
+- `chinese-civil-war-atlas.html` — Chinese Civil War, 1927–1950
+- `sino-japanese-war-atlas.html` — Second Sino-Japanese War, 1931–1945
 
 Maps use present-day borders. Events, dates and casualty figures are from general knowledge (the Middle East entries for 2025–26 were checked against public web sources) and many figures are disputed or rounded.
