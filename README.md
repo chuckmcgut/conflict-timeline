@@ -5,6 +5,7 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `greek-wars-atlas.html` — Persian and Peloponnesian Wars, 499–404 BC
 - `alexander-the-great-atlas.html` — Alexander's campaigns, 336–323 BC
 - `punic-wars-atlas.html` — Punic Wars, 264–146 BC
+- `marius-and-sulla-atlas.html` — Marius, Sulla and the first Roman civil war: the Jugurthine, Cimbrian, Social and Mithridatic wars, 112–77 BC
 - `gallic-and-roman-civil-wars-atlas.html` — Caesar's Gallic War and the Roman civil wars, 58–30 BC
 - `crusades-atlas.html` — Crusades, 1095–1291
 - `mongol-conquests-atlas.html` — Mongol conquests, 1206–1294
