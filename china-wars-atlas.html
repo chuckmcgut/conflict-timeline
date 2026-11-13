@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
-<title>Chinese Civil War Atlas</title>
+<title>China at War Atlas</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 /* Layout: a plotting table. Map and dispatch log side by side, one shared clock underneath with a lane per theater. */
@@ -136,8 +136,8 @@ button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 
 <div class="wrap">
   <header class="mast">
-    <h1>The Chinese Civil War <span>1927–1950</span></h1>
-    <p>From the Shanghai massacre to the fall of Hainan, Nationalists and Communists on one clock. Press play to watch the war unfold, drag the timeline, or pick any event.</p>
+    <h1>China at War <span>1927–1950</span></h1>
+    <p>The Chinese Civil War and the war with Japan, from the Shanghai massacre to the fall of Hainan, on one clock. Press play to watch the war unfold, drag the timeline, or pick any event.</p>
   </header>
 
   <div class="stage">
@@ -184,7 +184,7 @@ button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
     </div>
   </section>
 
-  <p class="note">Shading is a rough sketch on present-day borders. Mainland China is cut into eight regions that change color all at once when their main city fell or changed hands, which hides much of the war's patchwork: the Communist base areas inside Nationalist and Japanese territory are shown by red circles, whose size is only indicative. The timeline is not to scale; the years before 1945 are compressed. Casualty figures are estimates and many are disputed. Space plays or pauses; the arrow keys step between events; Ctrl or ⌘ plus scroll zooms the map.</p>
+  <p class="note">Shading is a rough sketch on present-day borders. Mainland China is cut into eight regions that change color all at once when their main city fell or changed hands, which hides much of the war's patchwork: the Communist base areas inside Nationalist and Japanese territory are shown by red circles, whose size is only indicative. The timeline is not to scale; the years before 1937 are compressed. Japanese occupation, Nationalist rule and Communist bases overlap in time, so the shading shows only the main authority in each region. Casualty figures are estimates and many are disputed. Space plays or pauses; the arrow keys step between events; Ctrl or ⌘ plus scroll zooms the map.</p>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
@@ -196,7 +196,7 @@ button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 const DAY=864e5, U=s=>{const [y,m,d]=s.split("-").map(Number);return Date.UTC(y,m-1,d)};
 const T0=U("1927-01-01"), T1=U("1950-12-31");
 const MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
-const TH={H:["Politics & diplomacy","Politics"],C:["Soviets & Long March","Soviets"],E:["Manchuria","Manchuria"],W:["North China & Central Plains","North"],M:["Yangtze, South & West","South"]};
+const TH={H:["Politics & diplomacy","Politics"],C:["Communist base areas & guerrillas","Communists"],E:["Manchuria","Manchuria"],W:["North China & Central Plains","North"],M:["Yangtze, South & West","South"],A:["Burma, Southwest & air war","Southwest"]};
 
 /* ---------- who held what: name -> steps "date:status" (x Communist, a Nationalist government, o Japanese-occupied or ruled, f warlord, Soviet-occupied or contested, n other) ---------- */
 const ST={};
@@ -220,73 +220,123 @@ const BASES=[
 ["Shaan-Gan-Ning Border Region",109.4,36.8,2.5,"1935-10-20","1947-03-19"],
 ["North China base areas",114.2,38.5,2.4,"1937-11-07","1949-01-31"],
 ["Shandong base area",118.3,36.4,1.6,"1938-01-01","1948-09-24"],
-["Northern Manchuria",126.0,46.5,3.0,"1946-01-01","1948-11-02"]
+["Northern Manchuria",126.0,46.5,3.0,"1946-01-01","1948-11-02"],
+["Northern Jiangsu and Anhui base area",119.6,33.2,1.4,"1941-01-20","1949-04-23"]
 ];
 
 /* ---------- events: [date, lane, title, lon, lat, text, arrows [[fromLon,fromLat,toLon,toLat],...]] ---------- */
 const EV=[
-["1927-04-12","H","Shanghai massacre",121.45,31.25,"Chiang Kai-shek's troops and Green Gang gangsters turn on their Communist allies and the Shanghai labor unions, killing hundreds, perhaps thousands, in a few days. The First United Front is over and the long struggle begins."],
-["1927-04-18","H","Nanjing government",118.78,32.06,"Chiang sets up a government at Nanjing in opposition to the left-wing regime at Wuhan. By June 1928 his Northern Expedition has taken Beijing and nominally reunified the country."],
-["1927-07-15","H","Wuhan expels the Communists",114.3,30.58,"Under pressure from its generals the left Guomindang regime breaks with the Communists in turn and soon rejoins Chiang. The Communists have nowhere legal left to go."],
-["1927-08-01","C","Nanchang Uprising",115.89,28.68,"Zhou Enlai, Zhu De and He Long lead some 20,000 mutinous troops in seizing the city for three days. It is the Communists' first armed action, and 1 August is still celebrated as the founding of the Red Army."],
-["1927-09-09","C","Autumn Harvest Uprising",113.6,28.4,"Mao Zedong leads a peasant army against Changsha, fails, and retreats with a thousand men into the Jinggang Mountains. There he turns to a strategy of rural base areas.",[[113.6,28.4,114.15,26.6]]],
-["1927-12-11","C","Canton Commune",113.26,23.13,"A Communist uprising holds Guangzhou for three days before Nationalist and warlord troops crush it, killing thousands. It is the last attempt to seize a city for twenty years."],
-["1928-06-04","E","Zhang Zuolin killed",123.4,41.8,"The Manchurian warlord's train is blown up near Mukden by Kwantung Army officers hoping to take over Manchuria. They fail. His son Zhang Xueliang pledges allegiance to Nanjing six months later."],
-["1928-06-08","W","Northern Expedition takes Beijing",116.4,39.9,"Nationalist armies enter the old capital without a fight and rename it Beiping. China is nominally reunified under Nanjing, but regional generals keep their armies."],
-["1930-05-11","W","Central Plains War",114.3,34.8,"Feng Yuxiang, Yan Xishan and Wang Jingwei combine against Chiang in the largest war between Chinese armies since the Northern Expedition. Chiang wins after six months, with Zhang Xueliang's decisive help, at a cost of some 300,000 casualties."],
-["1930-12-16","C","First Encirclement Campaign",115.2,27.0,"Chiang opens the first of five campaigns against the Jiangxi base. The Communists defeat the first three by luring columns deep into the mountains, where they can be ambushed."],
-["1931-09-18","E","Mukden Incident",123.43,41.8,"The Kwantung Army stages a railway explosion and seizes Manchuria. Zhang Xueliang's army, ordered not to resist, withdraws, and Chiang concentrates on defeating the Communists first."],
-["1931-11-07","C","Chinese Soviet Republic",116.03,25.88,"On the anniversary of the Russian Revolution, the Communists proclaim a government at Ruijin in southern Jiangxi, with Mao as chairman. It rules about three million people."],
-["1932-03-01","E","Manchukuo",125.32,43.88,"Japan proclaims a puppet state in Manchuria under the last Qing emperor, Puyi. Nanjing protests to the League of Nations but cannot resist."],
-["1933-10-01","C","Fifth Encirclement Campaign",116.0,26.5,"Advised by German officers, Chiang's half-million men advance slowly behind lines of blockhouses and strangle the Jiangxi base. The Communist leadership's shift to positional defence costs the Red Army heavily."],
-["1934-10-10","C","Long March begins",116.0,25.9,"About 86,000 soldiers and officials break out of the encirclement and march west, pursued by Chiang's forces and hostile warlords. In a year they cover about 9,000 km.",[[116,25.9,111,26],[111,26,106.9,27.7]]],
-["1935-01-15","C","Zunyi Conference",106.93,27.69,"Meeting in a captured warlord's villa, the leadership blames its military command for the disaster in Jiangxi. Mao Zedong becomes the Red Army's effective leader."],
-["1935-05-29","C","Luding Bridge",102.2,29.92,"The Red Army vanguard crosses the Dadu River on the iron chains of the Luding Bridge and escapes Chiang's trap. Later accounts exaggerate the fighting.",[[102,27,102.2,29.9]]],
-["1935-10-19","C","Long March ends",108.2,36.9,"Perhaps one in ten of those who left Jiangxi reach northern Shaanxi after a year and 9,000 km. The party makes Yan'an its capital in January 1937.",[[102.2,29.9,102.5,33],[102.5,33,108.2,36.9]]],
-["1936-12-12","H","Xi'an Incident",108.95,34.27,"The generals Zhang Xueliang and Yang Hucheng seize Chiang Kai-shek, whose orders to fight Communists rather than Japanese have angered their troops. After two weeks, with Zhou Enlai mediating, he agrees to a united front."],
-["1937-07-07","H","Marco Polo Bridge",116.21,39.85,"A clash between Japanese and Chinese troops near Beiping becomes full-scale war. The Communists place their forces under Nationalist command in September as the Eighth Route Army, a united front that lasts little more than three years."],
-["1937-12-13","H","Nanjing falls",118.78,32.06,"Japan takes the capital and the government retreats to Chongqing. Chiang's best divisions are spent at Shanghai and Nanjing; the Communists, in the hills, grow relatively stronger."],
-["1940-08-20","C","Hundred Regiments Offensive",113.0,38.0,"Peng Dehuai's Eighth Route Army attacks railways and mines across North China. Japanese reprisals devastate the base areas, and Mao later criticizes the operation as having exposed the party's strength."],
-["1941-01-04","H","New Fourth Army Incident",118.35,30.9,"Nationalist troops ambush the headquarters column of the Communist New Fourth Army in southern Anhui and kill several thousand. The united front is over in all but name."],
-["1942-02-01","C","Yan'an Rectification",109.5,36.6,"Mao launches a party-wide campaign of study, criticism and self-criticism that purges rivals and makes his thought the party's doctrine. It becomes the model for later campaigns."],
-["1944-07-22","H","Dixie Mission",109.5,36.6,"An American observer group reaches Yan'an and reports that the Communists are disciplined and popular, and that Chiang's government is corrupt and weakened by years of war."],
-["1945-04-23","C","Seventh Party Congress",109.5,36.6,"Meeting at Yan'an, a party of 1.2 million members writes Mao Zedong Thought into its constitution and confirms his leadership."],
-["1945-08-09","E","Soviet invasion of Manchuria",125.3,43.9,"The Red Army crushes the Kwantung Army in two weeks and stays until spring 1946, stripping factories of machinery. Its presence lets Communist forces move into the countryside and later gives them captured Japanese weapons.",[[131.6,43.2,129.5,44.6],[134,48.5,128.8,46.4],[117.5,49.6,122.5,46.4]]],
-["1945-08-28","H","Mao in Chongqing",106.55,29.56,"Mao flies to Chongqing at Chiang's invitation for six weeks of talks. The Double Tenth Agreement of 10 October promises peace and a coalition government but settles nothing."],
-["1945-09-30","W","Race for the north",117.2,39.1,"American aircraft and ships lift Nationalist armies into the northern cities, and some 50,000 US Marines land at Tianjin and Beiping to hold the railways."],
-["1945-10-12","W","Shangdang Campaign",113.1,36.2,"The Communists destroy an advancing Nationalist force of tens of thousands in southeast Shanxi, a first sign that they can fight set-piece battles."],
-["1946-01-10","H","Ceasefire and Political Consultative Conference",106.55,29.56,"General George Marshall brokers a ceasefire and a conference to plan a coalition government. Neither side honors it."],
-["1946-05-19","E","Siping and Changchun",124.35,43.17,"After the Soviets withdraw, Nationalist troops drive the Communists from Siping and take Changchun. Chiang then halts for talks, giving them a breathing space.",[[123.4,41.8,124.35,43.17],[124.35,43.17,125.3,43.9]]],
-["1946-06-26","W","Full-scale civil war",114.1,31.8,"Nationalist armies attack the Communist Central Plains base around Xuanhuadian in Hubei, and Marshall's mediation collapses. Chiang has about 4.3 million men against the Communists' 1.2 million, plus American equipment."],
-["1946-10-11","W","Zhangjiakou taken",114.88,40.82,"The Nationalists capture the Communist hub in the north, the high-water mark of their territorial control. Chiang convenes a National Assembly that the Communists boycott."],
-["1947-03-19","W","Yan'an falls",109.5,36.6,"Hu Zongnan's troops take the Communist capital, which Mao has abandoned. A quarter-million Nationalist troops are tied down chasing a few thousand men around northern Shaanxi."],
-["1947-05-16","W","Menglianggu",117.95,35.75,"Chen Yi's East China army destroys the Nationalist 74th Division, Chiang's best, in the Shandong hills in three days. Its commander dies in the battle."],
-["1947-06-30","W","Yellow River crossing",116.3,35.1,"Liu Bocheng and Deng Xiaoping lead some 120,000 men across the Yellow River and south to the Dabie Mountains, taking the war into the Nationalists' rear.",[[116.3,35.1,115.5,31.3]]],
-["1947-10-10","H","Outline Land Law",113.9,38.35,"The party's land law abolishes landlord ownership and redistributes it to peasants. Land reform gives millions of men a stake in the war and is violent: estimates of landlords killed over the following years run from several hundred thousand to millions."],
-["1948-04-22","W","Communists retake Yan'an",109.5,36.6,"The Nationalists abandon the city a year after taking it."],
-["1948-09-24","W","Jinan falls",117.0,36.65,"After eight days of assault, helped by a defecting commander, the Communists take the Shandong capital, the first large city captured by direct assault."],
-["1948-10-15","E","Jinzhou stormed",121.13,41.1,"Lin Biao's army storms Jinzhou in 31 hours, cutting Manchuria off from the rest of China and trapping the Nationalist garrisons. Chiang flies in twice, and the relief columns fail."],
-["1948-10-19","E","Changchun surrenders",125.32,43.88,"After a five-month blockade in which huge numbers of civilians starve, estimated at between 150,000 and over 300,000, the garrison changes sides."],
-["1948-11-02","E","Shenyang falls",123.43,41.8,"The last Nationalist stronghold in Manchuria falls. In 52 days the Liaoshen Campaign has cost the Nationalists about 470,000 men and handed the Communists the region's industry and a vast pool of veterans."],
-["1948-11-06","W","Huaihai Campaign",117.18,34.26,"Chen Yi and Liu Bocheng's armies begin a 65-day battle around Xuzhou. It will cost the Nationalists more than half a million men, including their best remaining armies."],
-["1948-11-29","W","Pingjin Campaign",116.4,39.9,"Lin Biao's veterans from Manchuria cut Beiping off from Tianjin and Zhangjiakou. Tianjin falls on 15 January after 29 hours of fighting, and Fu Zuoyi negotiates Beiping's surrender on 31 January."],
-["1949-01-10","W","Du Yuming surrounded",116.4,33.9,"The Huaihai Campaign ends with the capture of Du Yuming's army in a village in Henan. More than half a million Nationalist troops have been lost, and the road to the Yangtze is open."],
-["1949-01-21","H","Chiang steps aside",118.78,32.06,"Chiang retires 'temporarily' and hands the presidency to Li Zongren, who opens peace talks. Meanwhile Chiang ships much of China's gold reserves to Taiwan."],
-["1949-01-31","W","Beiping surrenders",116.4,39.9,"General Fu Zuoyi hands over the city and 200,000 troops without a fight, saving its monuments. The PLA parades in on 3 February."],
-["1949-04-21","M","Yangtze crossing",118.2,31.5,"A million men cross the river on a front of hundreds of kilometers in boats of every kind, after Nanjing rejects the Communist peace terms. Nationalist resistance collapses.",[[118.0,32.3,118.4,31.2]]],
-["1949-04-23","M","Nanjing falls",118.78,32.06,"Communist troops enter the Nationalist capital. The government had already moved to Guangzhou."],
-["1949-05-27","M","Shanghai falls",121.46,31.23,"After a fortnight of fighting on its edges, China's largest city falls with the city itself largely spared. Hyperinflation and blockade had already wrecked its economy."],
-["1949-08-26","M","Lanzhou taken",103.83,36.06,"Peng Dehuai's First Field Army takes the gateway to the northwest in a hard-fought battle. Xinjiang's Nationalist garrison defects in September."],
-["1949-09-26","H","Xinjiang changes sides",87.6,43.8,"The Nationalist commander Tao Zhiyue and the provincial government announce their defection. PLA units enter Xinjiang in October without a fight."],
-["1949-10-01","H","People's Republic proclaimed",116.39,39.91,"From the Gate of Heavenly Peace in Beijing, Mao Zedong declares the founding of the People's Republic. The Soviet Union recognizes it the next day."],
-["1949-10-14","M","Guangzhou falls",113.26,23.13,"The Nationalist government, which had moved there in February, flees to Chongqing as Communist troops enter. Retreating Nationalists blow up the Haizhu Bridge."],
-["1949-10-25","M","Battle of Guningtou",118.33,24.47,"On Kinmen, Nationalist troops destroy a Communist landing force of some 9,000 men that has run short of boats. The victory secures the offshore islands and encourages the Nationalists to hold Taiwan."],
-["1949-11-30","M","Chongqing falls",106.55,29.56,"The Nationalists withdraw after massacring hundreds of Communist and other political prisoners in the city's jails."],
-["1949-12-07","H","Government moves to Taipei",121.52,25.04,"Chiang's government relocates to Taiwan. Well over a million soldiers and civilians cross the strait in the following months."],
-["1949-12-27","M","Chengdu falls",104.07,30.67,"The last mainland capital of the Nationalists falls. Chiang had flown to Taiwan on 10 December."],
-["1950-05-01","M","Hainan taken",110.35,20.02,"A PLA fleet of junks, with help from local Communist guerrillas, takes the island in two weeks, the last great Nationalist loss of the coast."],
-["1950-06-27","H","US Seventh Fleet",120.0,24.5,"Two days after North Korea invades the South, Truman orders the Seventh Fleet into the Taiwan Strait. It ends Beijing's plans to invade the island and ties Taiwan's survival to American power."],
-["1950-10-19","M","Chamdo and Tibet",97.17,31.14,"The PLA defeats Tibetan government troops at Chamdo in eastern Tibet and then halts to negotiate. In 1951 Tibet signs the Seventeen Point Agreement under duress."]
+["1927-04-12", "H", "Shanghai massacre", 121.45, 31.25, "Chiang Kai-shek's troops and Green Gang gangsters turn on their Communist allies and the Shanghai labor unions, killing hundreds, perhaps thousands, in a few days. The First United Front is over and the long struggle begins."],
+["1927-04-18", "H", "Nanjing government", 118.78, 32.06, "Chiang sets up a government at Nanjing in opposition to the left-wing regime at Wuhan. By June 1928 his Northern Expedition has taken Beijing and nominally reunified the country."],
+["1927-07-15", "H", "Wuhan expels the Communists", 114.3, 30.58, "Under pressure from its generals the left Guomindang regime breaks with the Communists in turn and soon rejoins Chiang. The Communists have nowhere legal left to go."],
+["1927-08-01", "C", "Nanchang Uprising", 115.89, 28.68, "Zhou Enlai, Zhu De and He Long lead some 20,000 mutinous troops in seizing the city for three days. It is the Communists' first armed action, and 1 August is still celebrated as the founding of the Red Army."],
+["1927-09-09", "C", "Autumn Harvest Uprising", 113.6, 28.4, "Mao Zedong leads a peasant army against Changsha, fails, and retreats with a thousand men into the Jinggang Mountains. There he turns to a strategy of rural base areas.", [[113.6, 28.4, 114.15, 26.6]]],
+["1927-12-11", "C", "Canton Commune", 113.26, 23.13, "A Communist uprising holds Guangzhou for three days before Nationalist and warlord troops crush it, killing thousands. It is the last attempt to seize a city for twenty years."],
+["1928-06-04", "E", "Zhang Zuolin killed", 123.4, 41.8, "The Manchurian warlord's train is blown up near Mukden by Kwantung Army officers hoping to take over Manchuria. They fail. His son Zhang Xueliang pledges allegiance to Nanjing six months later."],
+["1928-06-08", "W", "Northern Expedition takes Beijing", 116.4, 39.9, "Nationalist armies enter the old capital without a fight and rename it Beiping. China is nominally reunified under Nanjing, but regional generals keep their armies."],
+["1930-05-11", "W", "Central Plains War", 114.3, 34.8, "Feng Yuxiang, Yan Xishan and Wang Jingwei combine against Chiang in the largest war between Chinese armies since the Northern Expedition. Chiang wins after six months, with Zhang Xueliang's decisive help, at a cost of some 300,000 casualties."],
+["1930-12-16", "C", "First Encirclement Campaign", 115.2, 27.0, "Chiang opens the first of five campaigns against the Jiangxi base. The Communists defeat the first three by luring columns deep into the mountains, where they can be ambushed."],
+["1931-09-18", "E", "Mukden Incident", 123.43, 41.8, "Officers of Japan's Kwantung Army blow up a stretch of their own railway outside Mukden and blame Chinese soldiers. By morning they hold the city, and without orders from Tokyo they overrun Manchuria within five months."],
+["1931-11-07", "C", "Chinese Soviet Republic", 116.03, 25.88, "On the anniversary of the Russian Revolution, the Communists proclaim a government at Ruijin in southern Jiangxi, with Mao as chairman. It rules about three million people."],
+["1932-01-28", "M", "Shanghai Incident", 121.48, 31.28, "After anti-Japanese boycotts, Japanese marines attack the Chinese districts of Shanghai. The 19th Route Army holds out for five weeks against bombers and warships; a ceasefire in May bars Chinese troops from the area around the city."],
+["1932-02-05", "E", "Harbin falls", 126.64, 45.76, "Japanese troops enter the last major city of Manchuria. They have taken Liaoning, Jilin and Heilongjiang in under five months, against an army ordered not to resist.", [[123.4, 41.8, 125.3, 43.9], [125.3, 43.9, 126.6, 45.8]]],
+["1932-03-01", "H", "Manchukuo", 125.32, 43.88, "Japan proclaims a puppet state under the last Qing emperor, Puyi, with its capital at Changchun. The League of Nations refuses to recognize it, and Japan leaves the League in 1933."],
+["1933-03-04", "E", "Japan takes Jehol", 118.17, 40.97, "A small cavalry detachment rides into Chengde, and the whole province is added to Manchukuo. Japanese troops are soon at the Great Wall, 200 km from Beiping."],
+["1933-05-31", "H", "Tanggu Truce", 117.65, 39.02, "China accepts a demilitarized zone south of the Great Wall that leaves Beiping and Tianjin open to Japanese pressure and in effect concedes Manchuria. Chiang Kai-shek's priority is to defeat the Communists first."],
+["1933-10-01", "C", "Fifth Encirclement Campaign", 116.0, 26.5, "Advised by German officers, Chiang's half-million men advance slowly behind lines of blockhouses and strangle the Jiangxi base. The Communist leadership's shift to positional defence costs the Red Army heavily."],
+["1934-10-10", "C", "Long March begins", 116.0, 25.9, "About 86,000 soldiers and officials break out of the encirclement and march west, pursued by Chiang's forces and hostile warlords. In a year they cover about 9,000 km.", [[116, 25.9, 111, 26], [111, 26, 106.9, 27.7]]],
+["1935-01-15", "C", "Zunyi Conference", 106.93, 27.69, "Meeting in a captured warlord's villa, the leadership blames its military command for the disaster in Jiangxi. Mao Zedong becomes the Red Army's effective leader."],
+["1935-05-29", "C", "Luding Bridge", 102.2, 29.92, "The Red Army vanguard crosses the Dadu River on the iron chains of the Luding Bridge and escapes Chiang's trap. Later accounts exaggerate the fighting.", [[102, 27, 102.2, 29.9]]],
+["1935-10-19", "C", "Long March ends", 108.2, 36.9, "Perhaps one in ten of those who left Jiangxi reach northern Shaanxi after a year and 9,000 km. The party makes Yan'an its capital in January 1937.", [[102.2, 29.9, 102.5, 33], [102.5, 33, 108.2, 36.9]]],
+["1935-12-09", "H", "December 9th Movement", 116.4, 39.92, "Thousands of students march in Beiping against Japanese plans to detach North China, and demonstrations spread to other cities. Pressure grows on Chiang to stop fighting Chinese and resist Japan."],
+["1936-12-12", "H", "Xi'an Incident", 108.95, 34.27, "The generals Zhang Xueliang and Yang Hucheng seize Chiang Kai-shek, whose orders to fight Communists rather than Japanese have angered their troops. After two weeks, with Zhou Enlai mediating, he agrees to a united front."],
+["1937-07-07", "W", "Marco Polo Bridge", 116.21, 39.85, "Shots near a bridge southwest of Beiping lead to a clash between Japanese and Chinese troops. Neither side plans a full war, but local settlements fail and within three weeks Japan sends reinforcements."],
+["1937-07-28", "W", "Beiping and Tianjin fall", 116.4, 39.9, "Japanese forces drive out the Chinese 29th Army and occupy both cities. A puppet government is set up at Beijing in December.", [[117.2, 39.1, 116.4, 39.9]]],
+["1937-08-13", "M", "Battle of Shanghai", 121.45, 31.28, "Chiang throws his best German-trained divisions into Shanghai to draw Japan into a fight on ground of his choosing. Three months of street fighting, with perhaps 200,000 Chinese and 40,000 Japanese casualties, end when a landing at Hangzhou Bay outflanks the defenders."],
+["1937-09-22", "H", "Second United Front", 109.5, 36.6, "The Communists place their forces under the National Revolutionary Army as the Eighth Route Army and pledge loyalty to the Republic. The alliance never becomes a real partnership."],
+["1937-09-25", "C", "Pingxingguan", 113.8, 39.4, "An ambush by Lin Biao's 115th Division destroys part of a Japanese brigade in a Shanxi mountain pass, the Communists' one large conventional victory of the war. Its propaganda value far exceeds its military effect."],
+["1937-11-08", "W", "Taiyuan falls", 112.55, 37.87, "After eight weeks the capital of Shanxi falls, giving Japan the coal and railways of the north. The Communists take to the hills to organize guerrilla bases behind the lines."],
+["1937-11-20", "H", "Chongqing becomes the capital", 106.55, 29.56, "Chiang moves the government upriver, beyond the reach of the Japanese navy. Over the next two years factories, universities and millions of refugees follow."],
+["1937-12-13", "M", "Nanjing falls", 118.78, 32.06, "Japanese troops take the capital and for six weeks kill, rape and loot. Estimates of the dead range from about 40,000 to more than 300,000, the figure China gives; most are civilians and disarmed soldiers."],
+["1938-04-07", "M", "Battle of Taierzhuang", 117.74, 34.57, "Chinese troops under Li Zongren trap a Japanese column in a town in southern Shandong, the first major Chinese victory of the war. Japan takes nearby Xuzhou six weeks later regardless."],
+["1938-06-09", "M", "Yellow River dikes broken", 113.65, 34.92, "To stop the Japanese advance on Wuhan, Chinese engineers breach the dikes at Huayuankou. The flood covers parts of three provinces. Estimates of the dead run from 400,000 to nearly a million, and millions are left homeless. The advance is delayed by months."],
+["1938-10-21", "M", "Japan takes Guangzhou", 113.26, 23.13, "A Japanese landing at Bias Bay meets almost no resistance, and Guangzhou is taken in days. It cuts China's main supply route from Hong Kong.", [[114.6, 22.5, 113.3, 23.1]]],
+["1938-10-25", "M", "Wuhan falls", 114.3, 30.58, "After more than four months along the Yangtze, Japan takes the three cities but fails to destroy the Chinese army. The war settles into a long stalemate: Japan holds the cities and railways, China the countryside and the west."],
+["1938-12-18", "H", "Wang Jingwei defects", 105.85, 21.03, "The senior Nationalist politician flees Chongqing for Hanoi, convinced that China cannot win. In 1940 he becomes head of a Japanese-sponsored government at Nanjing."],
+["1939-02-10", "M", "Japan takes Hainan", 110.35, 20.03, "Japanese marines land on the island. It gives them air and naval bases from which to threaten Indochina and Hong Kong."],
+["1939-05-03", "A", "Bombing of Chongqing", 106.55, 29.56, "Japan opens a sustained terror-bombing campaign, using incendiaries on the crowded wooden city. Raids on 3 and 4 May kill several thousand people. Attacks continue until 1943 and kill more than 10,000."],
+["1939-08-20", "E", "Battle of Khalkhin Gol", 119.0, 47.7, "Soviet tanks under Georgy Zhukov encircle and destroy a Japanese division on the Manchukuo-Mongolia border. A truce on 16 September ends the undeclared war and helps turn Japan's army toward the south."],
+["1939-09-17", "M", "First Battle of Changsha", 112.98, 28.2, "Chinese forces under Xue Yue draw the Japanese into a trap in Hunan and force them back with heavy losses, a morale-raising victory in the central provinces."],
+["1940-03-30", "H", "Wang Jingwei's government", 118.78, 32.06, "A Japanese-sponsored 'Reorganized National Government' claims to be the legitimate Republic of China. Japan recognizes it in November; few Chinese do."],
+["1940-06-12", "M", "Yichang falls", 111.29, 30.69, "Japan takes the Yangtze gorge port, bringing bombers within easy reach of Chongqing."],
+["1940-08-20", "C", "Hundred Regiments Offensive", 113.0, 38.0, "Peng Dehuai's Eighth Route Army attacks railways, bridges and mines across North China, the Communists' biggest operation of the war. Japanese reprisals, which the Chinese call the 'Three Alls' (kill all, burn all, loot all), devastate the base areas."],
+["1940-09-22", "A", "Japan enters Indochina", 106.76, 21.85, "Japan occupies northern French Indochina and cuts the railway from Haiphong that carried much of China's imports."],
+["1940-10-04", "M", "Plague attacks", 118.87, 28.97, "Japanese aircraft drop plague-infected fleas on Quzhou and, weeks later, Ningbo. The outbreaks kill hundreds. Investigators link them to Unit 731, the army's biological warfare organization near Harbin."],
+["1941-01-04", "C", "New Fourth Army Incident", 118.35, 30.9, "Nationalist troops ambush and destroy the headquarters column of the Communist New Fourth Army in southern Anhui, killing several thousand. The united front is over in all but name."],
+["1941-04-13", "H", "Soviet-Japanese neutrality pact", 37.62, 55.75, "Moscow and Tokyo agree not to attack each other and respect Manchukuo's and Mongolia's borders. It leaves China without Soviet help and Japan free to move south."],
+["1941-12-09", "H", "China declares war", 106.55, 29.56, "Two days after Pearl Harbor the Republic formally declares war on Japan, Germany and Italy, having fought alone for four and a half years. American aid and Allied standing follow."],
+["1941-12-20", "A", "Flying Tigers in action", 102.7, 25.04, "American Volunteer Group pilots, hired by the Chinese government and flying shark-faced P-40s, score their first victories over Kunming."],
+["1941-12-25", "M", "Hong Kong falls", 114.17, 22.28, "The British colony surrenders after eighteen days. All of China's supplies must now come through Burma or by air."],
+["1942-01-15", "M", "Third Battle of Changsha", 112.98, 28.2, "The Chinese again lure the Japanese into Hunan and beat them back, the first Allied victory over Japan after Pearl Harbor."],
+["1942-02-01", "C", "Yan'an Rectification", 109.5, 36.6, "Mao launches a party-wide campaign of study, criticism and self-criticism that purges rivals and makes his thought the party's doctrine. It becomes the model for later campaigns."],
+["1942-04-18", "A", "Doolittle Raid", 118.9, 29.0, "Sixteen B-25 bombers launched from the carrier Hornet bomb Tokyo, then crash-land or bail out over China. Chinese villagers shelter many of the crews."],
+["1942-04-29", "A", "Burma Road cut", 97.75, 22.93, "Japan takes Lashio, the road's southern terminus, after driving the British out of Rangoon. Chinese armies that had marched into Burma retreat into Yunnan and India, and the United States begins flying supplies over the Himalayas."],
+["1942-05-15", "M", "Zhejiang-Jiangxi Campaign", 119.5, 29.2, "Japanese forces sweep through the airfields where the Doolittle crews had landed, burning towns and killing perhaps 250,000 Chinese civilians."],
+["1942-10-01", "M", "Henan famine", 113.7, 34.8, "Drought, locusts and heavy grain requisitions by the army bring famine to Henan. Estimates of the dead range from one million to three million, while the government is slow to relieve the province."],
+["1943-01-11", "H", "Unequal treaties ended", 106.55, 29.56, "Britain and the United States sign treaties giving up extraterritorial rights and their concessions in China, ending a century of treaty-port privilege."],
+["1943-11-22", "H", "Cairo Conference", 31.24, 30.05, "Chiang meets Roosevelt and Churchill. Their declaration promises that Manchuria and Taiwan will be returned to China after the war, the high point of China's international standing."],
+["1944-04-17", "M", "Operation Ichi-Go", 114.0, 34.75, "Japan launches its largest offensive of the war, some 500,000 men, to open a land route from Manchuria to Indochina and seize the American airfields in southern China. In eight months it takes Henan, Hunan, Guangxi and Guizhou, and Chinese armies suffer hundreds of thousands of casualties.", [[114, 34.7, 113, 28.2], [113, 28.2, 112.6, 26.9], [112.6, 26.9, 110.3, 25.3], [110.3, 25.3, 107.5, 25.8]]],
+["1944-06-15", "A", "B-29 raids from Chengdu", 104.07, 30.67, "The first American B-29 raids on Japan itself leave airfields built by some 300,000 Chinese laborers. Supply costs prove too great, and the bombers soon move to the Marianas.", [[104.1, 30.7, 130.8, 33.9]]],
+["1944-06-18", "M", "Changsha falls", 112.98, 28.2, "After three failed attempts, Japan takes the city of Changsha."],
+["1944-07-22", "C", "Dixie Mission", 109.5, 36.6, "An American observer group arrives in Yan'an. It reports that the Communists are disciplined and popular, and that Chiang's government is corrupt and exhausted by years of war."],
+["1944-08-08", "M", "Hengyang falls", 112.6, 26.89, "The Chinese 10th Army holds out for 47 days, waiting for relief that never comes."],
+["1944-09-14", "A", "Tengchong retaken", 98.5, 25.02, "A Chinese expeditionary force, retrained and supplied by the Americans, crosses the Salween and takes the Yunnan border town after eight weeks."],
+["1944-10-19", "H", "Stilwell recalled", 106.55, 29.56, "Roosevelt withdraws General Joseph Stilwell, whose open contempt for Chiang had made him impossible to work with, and replaces him with Albert Wedemeyer."],
+["1944-11-10", "M", "Guilin and Liuzhou lost", 110.3, 25.3, "Japan takes the American airfields in Guangxi. In December units from the north and south meet in Indochina, forming an unbroken land route from Korea to Vietnam for the first time."],
+["1945-01-28", "A", "Burma Road reopened", 98.0, 24.1, "The first convoy from India crosses the Ledo Road into Yunnan, too late to matter much to the war's outcome."],
+["1945-04-06", "M", "Battle of West Hunan", 109.7, 27.5, "Chinese troops with American air support stop Japan's last offensive in China at Zhijiang."],
+["1945-04-23", "C", "Seventh Party Congress", 109.5, 36.6, "Meeting at Yan'an, a party of 1.2 million members writes Mao Zedong Thought into its constitution and confirms his leadership."],
+["1945-07-28", "M", "Guilin recovered", 110.29, 25.28, "Chinese armies retake Guangxi as Japan pulls back to hold the coast and the north."],
+["1945-08-06", "H", "Atomic bombs", 132.45, 34.39, "The United States drops an atomic bomb on Hiroshima and, on 9 August, another on Nagasaki."],
+["1945-08-09", "E", "Soviet invasion of Manchuria", 125.3, 43.9, "The Red Army crushes the Kwantung Army in two weeks and stays until spring 1946, stripping factories of machinery. Its presence lets Communist forces move into the countryside and later gives them captured Japanese weapons.", [[131.6, 43.2, 129.5, 44.6], [134, 48.5, 128.8, 46.4], [117.5, 49.6, 122.5, 46.4]]],
+["1945-08-15", "H", "Japan surrenders", 139.7, 35.69, "Emperor Hirohito broadcasts Japan's acceptance of the Allied terms. After fourteen years, China's war ends in victory. Estimates of Chinese dead run from 14 million to 20 million."],
+["1945-08-28", "H", "Mao in Chongqing", 106.55, 29.56, "Mao flies to Chongqing at Chiang's invitation for six weeks of talks. The Double Tenth Agreement of 10 October promises peace and a coalition government but settles nothing."],
+["1945-09-02", "H", "Instrument of surrender", 139.9, 35.3, "Japan's representatives sign the surrender aboard the battleship Missouri in Tokyo Bay."],
+["1945-09-09", "H", "Surrender in China", 118.78, 32.06, "General Okamura Yasuji surrenders over a million Japanese troops in China to General He Yingqin at the Central Military Academy in Nanjing."],
+["1945-09-30", "W", "Race for the north", 117.2, 39.1, "American aircraft and ships lift Nationalist armies into the northern cities, and some 50,000 US Marines land at Tianjin and Beiping to hold the railways."],
+["1945-10-12", "W", "Shangdang Campaign", 113.1, 36.2, "The Communists destroy an advancing Nationalist force of tens of thousands in southeast Shanxi, a first sign that they can fight set-piece battles."],
+["1945-10-25", "H", "Taiwan restored", 121.5, 25.04, "After fifty years of Japanese rule the island is handed over to Nationalist officials in Taipei. Its new rulers' corruption helps bring about the uprising of February 1947."],
+["1946-01-10", "H", "Ceasefire and Political Consultative Conference", 106.55, 29.56, "General George Marshall brokers a ceasefire and a conference to plan a coalition government. Neither side honors it."],
+["1946-05-19", "E", "Siping and Changchun", 124.35, 43.17, "After the Soviets withdraw, Nationalist troops drive the Communists from Siping and take Changchun. Chiang then halts for talks, giving them a breathing space.", [[123.4, 41.8, 124.35, 43.17], [124.35, 43.17, 125.3, 43.9]]],
+["1946-06-26", "W", "Full-scale civil war", 114.1, 31.8, "Nationalist armies attack the Communist Central Plains base around Xuanhuadian in Hubei, and Marshall's mediation collapses. Chiang has about 4.3 million men against the Communists' 1.2 million, plus American equipment."],
+["1946-10-11", "W", "Zhangjiakou taken", 114.88, 40.82, "The Nationalists capture the Communist hub in the north, the high-water mark of their territorial control. Chiang convenes a National Assembly that the Communists boycott."],
+["1947-03-19", "W", "Yan'an falls", 109.5, 36.6, "Hu Zongnan's troops take the Communist capital, which Mao has abandoned. A quarter-million Nationalist troops are tied down chasing a few thousand men around northern Shaanxi."],
+["1947-05-16", "W", "Menglianggu", 117.95, 35.75, "Chen Yi's East China army destroys the Nationalist 74th Division, Chiang's best, in the Shandong hills in three days. Its commander dies in the battle."],
+["1947-06-30", "W", "Yellow River crossing", 116.3, 35.1, "Liu Bocheng and Deng Xiaoping lead some 120,000 men across the Yellow River and south to the Dabie Mountains, taking the war into the Nationalists' rear.", [[116.3, 35.1, 115.5, 31.3]]],
+["1947-10-10", "H", "Outline Land Law", 113.9, 38.35, "The party's land law abolishes landlord ownership and redistributes it to peasants. Land reform gives millions of men a stake in the war and is violent: estimates of landlords killed over the following years run from several hundred thousand to millions."],
+["1948-04-22", "W", "Communists retake Yan'an", 109.5, 36.6, "The Nationalists abandon the city a year after taking it."],
+["1948-09-24", "W", "Jinan falls", 117.0, 36.65, "After eight days of assault, helped by a defecting commander, the Communists take the Shandong capital, the first large city captured by direct assault."],
+["1948-10-15", "E", "Jinzhou stormed", 121.13, 41.1, "Lin Biao's army storms Jinzhou in 31 hours, cutting Manchuria off from the rest of China and trapping the Nationalist garrisons. Chiang flies in twice, and the relief columns fail."],
+["1948-10-19", "E", "Changchun surrenders", 125.32, 43.88, "After a five-month blockade in which huge numbers of civilians starve, estimated at between 150,000 and over 300,000, the garrison changes sides."],
+["1948-11-02", "E", "Shenyang falls", 123.43, 41.8, "The last Nationalist stronghold in Manchuria falls. In 52 days the Liaoshen Campaign has cost the Nationalists about 470,000 men and handed the Communists the region's industry and a vast pool of veterans."],
+["1948-11-06", "W", "Huaihai Campaign", 117.18, 34.26, "Chen Yi and Liu Bocheng's armies begin a 65-day battle around Xuzhou. It will cost the Nationalists more than half a million men, including their best remaining armies."],
+["1948-11-29", "W", "Pingjin Campaign", 116.4, 39.9, "Lin Biao's veterans from Manchuria cut Beiping off from Tianjin and Zhangjiakou. Tianjin falls on 15 January after 29 hours of fighting, and Fu Zuoyi negotiates Beiping's surrender on 31 January."],
+["1949-01-10", "W", "Du Yuming surrounded", 116.4, 33.9, "The Huaihai Campaign ends with the capture of Du Yuming's army in a village in Henan. More than half a million Nationalist troops have been lost, and the road to the Yangtze is open."],
+["1949-01-21", "H", "Chiang steps aside", 118.78, 32.06, "Chiang retires 'temporarily' and hands the presidency to Li Zongren, who opens peace talks. Meanwhile Chiang ships much of China's gold reserves to Taiwan."],
+["1949-01-31", "W", "Beiping surrenders", 116.4, 39.9, "General Fu Zuoyi hands over the city and 200,000 troops without a fight, saving its monuments. The PLA parades in on 3 February."],
+["1949-04-21", "M", "Yangtze crossing", 118.2, 31.5, "A million men cross the river on a front of hundreds of kilometers in boats of every kind, after Nanjing rejects the Communist peace terms. Nationalist resistance collapses.", [[118.0, 32.3, 118.4, 31.2]]],
+["1949-05-27", "M", "Shanghai falls", 121.46, 31.23, "After a fortnight of fighting on its edges, China's largest city falls with the city itself largely spared. Hyperinflation and blockade had already wrecked its economy."],
+["1949-08-26", "M", "Lanzhou taken", 103.83, 36.06, "Peng Dehuai's First Field Army takes the gateway to the northwest in a hard-fought battle. Xinjiang's Nationalist garrison defects in September."],
+["1949-09-26", "H", "Xinjiang changes sides", 87.6, 43.8, "The Nationalist commander Tao Zhiyue and the provincial government announce their defection. PLA units enter Xinjiang in October without a fight."],
+["1949-10-01", "H", "People's Republic proclaimed", 116.39, 39.91, "From the Gate of Heavenly Peace in Beijing, Mao Zedong declares the founding of the People's Republic. The Soviet Union recognizes it the next day."],
+["1949-10-14", "M", "Guangzhou falls", 113.26, 23.13, "The Nationalist government, which had moved there in February, flees to Chongqing as Communist troops enter. Retreating Nationalists blow up the Haizhu Bridge."],
+["1949-10-25", "M", "Battle of Guningtou", 118.33, 24.47, "On Kinmen, Nationalist troops destroy a Communist landing force of some 9,000 men that has run short of boats. The victory secures the offshore islands and encourages the Nationalists to hold Taiwan."],
+["1949-11-30", "M", "Chongqing falls", 106.55, 29.56, "The Nationalists withdraw after massacring hundreds of Communist and other political prisoners in the city's jails."],
+["1949-12-07", "H", "Government moves to Taipei", 121.52, 25.04, "Chiang's government relocates to Taiwan. Well over a million soldiers and civilians cross the strait in the following months."],
+["1949-12-27", "M", "Chengdu falls", 104.07, 30.67, "The last mainland capital of the Nationalists falls. Chiang had flown to Taiwan on 10 December."],
+["1950-05-01", "M", "Hainan taken", 110.35, 20.02, "A PLA fleet of junks, with help from local Communist guerrillas, takes the island in two weeks, the last great Nationalist loss of the coast."],
+["1950-06-27", "H", "US Seventh Fleet", 120.0, 24.5, "Two days after North Korea invades the South, Truman orders the Seventh Fleet into the Taiwan Strait. It ends Beijing's plans to invade the island and ties Taiwan's survival to American power."],
+["1950-10-19", "M", "Chamdo and Tibet", 97.17, 31.14, "The PLA defeats Tibetan government troops at Chamdo in eastern Tibet and then halts to negotiate. In 1951 Tibet signs the Seventeen Point Agreement under duress."]
 ];
 
 /* ---------- map ---------- */
@@ -365,7 +415,7 @@ function zoomTo(b,d=dur){
   const s=Math.min(40,.96/Math.max((x1-x0)/W,(y1-y0)/H));
   svg.transition().duration(d).call(zoom.transform,d3.zoomIdentity.translate(W/2-s*(x0+x1)/2,H/2-s*(y0+y1)/2).scale(s));
 }
-const VIEWS=[["China",null],["Manchuria",[118,38,135,54]],["North China",[108,32,122,42]],["Yangtze & the East",[108,25,123,35]],["South China",[104,18,118,26]],["Southwest & Northwest",[92,24,112,42]]];
+const VIEWS=[["China",null],["Manchuria",[118,38,135,54]],["North China",[108,32,122,42]],["Yangtze & the East",[108,25,123,35]],["South China",[104,18,118,26]],["Southwest & Burma Road",[92,20,112,32]],["Northwest",[95,32,112,42]]];
 const viewsEl=document.getElementById("views");
 VIEWS.forEach((v,i)=>{const b=document.createElement("button");b.type="button";b.className="chip";b.textContent=v[0];
   b.setAttribute("aria-pressed",i===1);b.onclick=()=>{viewsEl.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));zoomTo(v[1])};viewsEl.appendChild(b)});
@@ -375,7 +425,7 @@ document.getElementById("zout").onclick=()=>svg.transition().duration(reduce?0:2
 
 /* ---------- timeline lanes ---------- */
 const lanesEl=document.getElementById("lanes"), scrub=document.getElementById("scrub"), head=document.getElementById("head");
-const BP=[["1927-01-01",0],["1937-01-01",.28],["1945-08-01",.44],["1950-12-31",1]].map(b=>[U(b[0]),b[1]]);
+const BP=[["1927-01-01",0],["1937-01-01",.2],["1945-08-01",.5],["1950-12-31",1]].map(b=>[U(b[0]),b[1]]);
 const pct=t=>{t=Math.max(T0,Math.min(T1,t));for(let i=1;i<BP.length;i++)if(t<=BP[i][0]){const a=BP[i-1],b=BP[i];return 100*(a[1]+(b[1]-a[1])*(t-a[0])/(b[0]-a[0]))}return 100};
 const inv=p=>{p=Math.max(0,Math.min(1,p));for(let i=1;i<BP.length;i++)if(p<=BP[i][1]){const a=BP[i-1],b=BP[i];return a[0]+(b[0]-a[0])*(p-a[1])/(b[1]-a[1])}return T1};
 const on={};
@@ -450,7 +500,7 @@ function setPlaying(p){
 function frame(now){
   if(!playing) return;
   const dt=Math.min(100,now-last);last=now;pin=null;
-  t=inv(pct(t)/100+dt/1000*speed/150);
+  t=inv(pct(t)/100+dt/1000*speed/170);
   if(t>=T1){t=T1;setPlaying(false)}
   render(); if(playing) requestAnimationFrame(frame);
 }
