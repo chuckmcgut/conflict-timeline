@@ -20,5 +20,7 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `minnesota-history-atlas.html` — Minnesota history: treaties and conflicts with the Dakota and Ojibwe, mining, milling and railroads, 1660–2021
 - `roses-and-civil-war-atlas.html` — Wars of the Roses and the English Civil War, 1450–1660
 - `crimean-war-atlas.html` — Crimean War, 1853–1856
+- `gallic-and-roman-civil-wars-atlas.html` — Caesar's Gallic War and the Roman civil wars, 58–30 BC
+- `hundred-years-war-atlas.html` — Hundred Years' War, 1337–1453
 
 Maps use present-day borders. Events, dates and casualty figures are from general knowledge (the Middle East entries for 2025–26 were checked against public web sources) and many figures are disputed or rounded.
