@@ -2,6 +2,7 @@
 
 Self-contained interactive history atlases: an animated map plus a timeline with one lane per theater, listed here in chronological order. Each is a single HTML file; open it in a browser (map libraries load from a CDN).
 
+- `caribbean-atlas.html` — The Caribbean: settlement, European contact, conquest, slavery and revolt, wars, treaties and independence, 6000 BC–2024
 - `greek-wars-atlas.html` — Persian and Peloponnesian Wars, 499–404 BC
 - `alexander-the-great-atlas.html` — Alexander's campaigns, 336–323 BC
 - `punic-wars-atlas.html` — Punic Wars, 264–146 BC
