@@ -12,11 +12,14 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `mongol-conquests-atlas.html` — Mongol conquests, 1206–1294
 - `hundred-years-war-atlas.html` — Hundred Years' War, 1337–1453
 - `roses-and-civil-war-atlas.html` — Wars of the Roses and the English Civil War, 1450–1660
+- `spanish-conquest-atlas.html` — Spanish conquest of the Americas: the Caribbean, the Aztec, Maya and Inca empires, the Muisca and Mapuche, and the entradas into North America, 1492–1600
 - `american-indian-wars-atlas.html` — American Indian Wars, 1600–1890
 - `thirty-years-war-atlas.html` — Thirty Years' War, from the Defenestration of Prague to the Peace of Westphalia, 1618–1648
 - `minnesota-history-atlas.html` — Minnesota history: treaties and conflicts with the Dakota and Ojibwe, mining, milling and railroads, 1660–2021
+- `seven-years-war-atlas.html` — Seven Years' War in Europe, North America, the Caribbean, Africa and India, 1754–1763
 - `revolutionary-war-atlas.html` — American Revolutionary War, 1773–1783
 - `napoleonic-wars-atlas.html` — Napoleonic Wars, 1789–1815
+- `mexican-american-war-atlas.html` — Texas Revolution and Mexican–American War, 1835–1854
 - `crimean-war-atlas.html` — Crimean War, 1853–1856
 - `civil-war-atlas.html` — American Civil War, 1860–1865
 - `wwi-atlas.html` — World War I, 1914–1918
