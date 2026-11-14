@@ -13,6 +13,7 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `hundred-years-war-atlas.html` — Hundred Years' War, 1337–1453
 - `roses-and-civil-war-atlas.html` — Wars of the Roses and the English Civil War, 1450–1660
 - `american-indian-wars-atlas.html` — American Indian Wars, 1600–1890
+- `thirty-years-war-atlas.html` — Thirty Years' War, from the Defenestration of Prague to the Peace of Westphalia, 1618–1648
 - `minnesota-history-atlas.html` — Minnesota history: treaties and conflicts with the Dakota and Ojibwe, mining, milling and railroads, 1660–2021
 - `revolutionary-war-atlas.html` — American Revolutionary War, 1773–1783
 - `napoleonic-wars-atlas.html` — Napoleonic Wars, 1789–1815
