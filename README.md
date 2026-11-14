@@ -20,6 +20,7 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `revolutionary-war-atlas.html` — American Revolutionary War, 1773–1783
 - `napoleonic-wars-atlas.html` — Napoleonic Wars, 1789–1815
 - `mexican-american-war-atlas.html` — Texas Revolution and Mexican–American War, 1835–1854
+- `german-unification-atlas.html` — German unification: 1848, the Danish, Austro-Prussian and Franco-Prussian wars, Italy's wars and the Paris Commune, 1848–1871
 - `crimean-war-atlas.html` — Crimean War, 1853–1856
 - `civil-war-atlas.html` — American Civil War, 1860–1865
 - `wwi-atlas.html` — World War I, 1914–1918
