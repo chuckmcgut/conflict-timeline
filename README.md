@@ -8,6 +8,7 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `punic-wars-atlas.html` — Punic Wars, 264–146 BC
 - `marius-and-sulla-atlas.html` — Marius, Sulla and the first Roman civil war: the Jugurthine, Cimbrian, Social and Mithridatic wars, 112–77 BC
 - `gallic-and-roman-civil-wars-atlas.html` — Caesar's Gallic War and the Roman civil wars, 58–30 BC
+- `early-islamic-conquests-atlas.html` — Early Islamic conquests: Muhammad, the Rashidun and Umayyad caliphates, the Abbasid revolution and the Emirate of Cordoba, 610–756
 - `viking-age-atlas.html` — Viking Age: raids, the Danelaw, Normandy, the Rus, Iceland, Greenland and Vinland, 789–1066
 - `crusades-atlas.html` — Crusades, 1095–1291
 - `mongol-conquests-atlas.html` — Mongol conquests, 1206–1294
