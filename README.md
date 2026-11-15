@@ -26,6 +26,7 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `wwi-atlas.html` — World War I, 1914–1918
 - `russian-civil-war-atlas.html` — Russian Revolution and Civil War, 1917–1922
 - `china-wars-atlas.html` — Chinese Civil War and Second Sino-Japanese War, 1927–1950
+- `spanish-civil-war-atlas.html` — Spanish Civil War: the Second Republic, the 1936 rising, foreign intervention and Franco's victory, 1931–1939
 - `wwii-atlas.html` — World War II, 1939–1945
 - `middle-east-conflicts-atlas.html` — Israel–Palestine, Yemen and Iran, 1947–2026
 - `vietnam-war-atlas.html` — Vietnam War, 1954–1976
