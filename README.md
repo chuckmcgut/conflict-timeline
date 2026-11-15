@@ -12,6 +12,7 @@ Self-contained interactive history atlases: an animated map plus a timeline with
 - `viking-age-atlas.html` — Viking Age: raids, the Danelaw, Normandy, the Rus, Iceland, Greenland and Vinland, 789–1066
 - `crusades-atlas.html` — Crusades, 1095–1291
 - `mongol-conquests-atlas.html` — Mongol conquests, 1206–1294
+- `ottoman-empire-atlas.html` — Rise of the Ottoman Empire, 1299–1699
 - `hundred-years-war-atlas.html` — Hundred Years' War, 1337–1453
 - `roses-and-civil-war-atlas.html` — Wars of the Roses and the English Civil War, 1450–1660
 - `spanish-conquest-atlas.html` — Spanish conquest of the Americas: the Caribbean, the Aztec, Maya and Inca empires, the Muisca and Mapuche, and the entradas into North America, 1492–1600
